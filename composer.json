@@ -1,0 +1,19 @@
+{
+	"name": "binarytemplar/dark-admin-mode",
+	"description": "Dev tooling only. Nothing here ships with the plugin.",
+	"license": "GPL-2.0-or-later",
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3",
+		"phpcompatibility/phpcompatibility-wp": "3.0.0-alpha2@alpha",
+		"phpcompatibility/php-compatibility": "10.0.0-alpha2@alpha",
+		"phpcompatibility/phpcompatibility-paragonie": "2.0.0-alpha2@alpha"
+	},
+	"config": {
+		"platform": {
+			"php": "7.4"
+		},
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

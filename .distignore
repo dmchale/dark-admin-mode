@@ -1,0 +1,21 @@
+# Everything listed here stays out of the wordpress.org release.
+# bin/plugin-check.sh builds the release copy from this list, runs Plugin Check on it, then zips it.
+
+# Version control and editor/tooling config
+/.git/
+/.gitignore
+/.distignore
+/.idea/
+/.claude/
+/CLAUDE.md
+
+# GitHub-facing; wordpress.org uses readme.txt
+/README.md
+
+# Dev tooling
+/bin/
+/build/
+/vendor/
+/composer.json
+/composer.lock
+/.phpcs.xml.dist

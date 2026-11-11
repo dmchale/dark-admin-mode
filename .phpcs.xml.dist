@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ruleset name="Dark Admin Mode">
+	<description>Coding standards for Dark Admin Mode.</description>
+
+	<file>.</file>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/lib/*</exclude-pattern>
+	<arg name="extensions" value="php"/>
+	<arg value="s"/>
+
+	<config name="minimum_wp_version" value="7.0"/>
+	<config name="testVersion" value="7.4-"/>
+
+	<rule ref="WordPress"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="BinaryTemplar\DarkAdminMode"/>
+				<element value="dark_admin_mode"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="dark-admin-mode"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>
