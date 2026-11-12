@@ -4,6 +4,12 @@ A dark Administration Color Scheme for the WordPress admin. Each user opts in fr
 
 Install `dark-admin-mode.zip` from the [latest release](https://github.com/dmchale/dark-admin-mode/releases/latest) (not the "Source code" zips, which unpack under the wrong folder name). Installed sites update from GitHub Releases through the bundled [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker) (`lib/`, MIT).
 
+## Screenshots
+
+![The Plugins screen in Dark Admin Mode](screenshots/plugins.png)
+
+![Choosing Dark Admin Mode under Users → Profile → Administration Color Scheme](screenshots/color-scheme.png)
+
 ## Development
 
 Plain PHP and CSS loaded directly by WordPress; there's no build step.

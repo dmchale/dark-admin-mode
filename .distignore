@@ -11,6 +11,7 @@
 
 # GitHub-facing; wordpress.org uses readme.txt
 /README.md
+/screenshots/
 
 # Dev tooling
 /bin/

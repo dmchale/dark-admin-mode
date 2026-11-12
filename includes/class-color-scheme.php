@@ -39,7 +39,7 @@ final class Color_Scheme {
 			__( 'Dark Admin Mode', 'dark-admin-mode' ),
 			// Core adds its own `ver` (the WordPress version), so a separate argument busts our cache.
 			add_query_arg( 'dark-admin-mode-ver', VERSION, plugins_url( 'assets/css/admin.css', PLUGIN_FILE ) ),
-			array( '#1b1b1b', '#282828', '#333333', '#8ac7ff' ),
+			array( '#1b1b1b', '#282828', '#727272', '#8ac7ff' ),
 			array(
 				'base'    => '#b5b5b5',
 				'focus'   => '#8ac7ff',

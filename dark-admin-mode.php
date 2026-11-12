@@ -3,7 +3,7 @@
  * Plugin Name: Dark Admin Mode
  * Plugin URI: https://www.binarytemplar.com/dark-admin-mode
  * Description: Adds a dark Administration Color Scheme, selected automatically for the user who activates the plugin. Other users can choose it under Users → Profile.
- * Version: 1.1.1
+ * Version: 1.1.2
  * Requires at least: 7.0
  * Requires PHP: 7.4
  * Author: Dave McHale
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Keep in sync with the Version header above and the Stable tag in readme.txt. Busts the stylesheet cache.
-const VERSION     = '1.1.1';
+const VERSION     = '1.1.2';
 const PLUGIN_FILE = __FILE__;
 
 require_once __DIR__ . '/includes/class-color-scheme.php';

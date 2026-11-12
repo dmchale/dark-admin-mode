@@ -4,7 +4,7 @@ Tags: dark mode, admin, color scheme, dashboard, accessibility
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,10 @@ GitHub Releases, not WordPress.org. The plugin checks https://github.com/dmchale
 No. Once selected it is always dark.
 
 == Changelog ==
+
+= 1.1.2 =
+* Admin notices keep their colored edges again (success, warning, error, info).
+* Color scheme picker: the third swatch is visible when selected, and palettes have an outline so dark swatches stand out.
 
 = 1.1.1 =
 * Block inserter: dark search strip and Media/Patterns panel.

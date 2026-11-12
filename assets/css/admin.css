@@ -63,9 +63,12 @@ html, body.wp-admin, #wpwrap, #wpcontent, #wpbody {background:var(--dark-admin-b
 .wp-admin :is(.button,.button-secondary,.page-title-action):hover {background:var(--dark-admin-raised);color:#c2e1ff}
 .wp-admin .button-primary,.wp-admin .button-primary:hover {background:#2271b1;border-color:#8ac7ff;color:#fff}
 .wp-admin :is(a,button,input,textarea,select):focus-visible:where(:not(.block-editor-block-popover *,.components-notice *)) {outline:2px solid #8ac7ff;outline-offset:2px;box-shadow:none}
-.wp-admin :is(.notice-error,.error) {border-left-color:#ff9999}
-.wp-admin .notice-warning {border-left-color:#edc86b}
-.wp-admin :is(.notice-success,.updated) {border-left-color:#a3d7b6}
+/* Notice accents. The panel rule above gets heavy specificity from its compound :is() items and paints every border gray,
+   so the accents anchor on #wpbody to win it back (as the media grid fix does). */
+#wpbody :is(.notice,div.error,div.updated):is(.notice-error,.error) {border-left-color:#ff9999}
+#wpbody .notice.notice-warning {border-left-color:#edc86b}
+#wpbody :is(.notice,div.updated):is(.notice-success,.updated) {border-left-color:#a3d7b6}
+#wpbody .notice.notice-info {border-left-color:#8ac7ff}
 .wp-admin :is(code,kbd,.code) {background:var(--dark-admin-raised);color:var(--dark-admin-text)}
 /* Editor controls use their own tokens; leave actual canvas contents alone. */
 .wp-admin :is(.interface-interface-skeleton__header,.interface-interface-skeleton__sidebar,.interface-interface-skeleton__footer,.editor-header,.editor-sidebar,.components-panel,.components-panel__body,.components-modal__content,.block-editor-inserter__menu,.block-editor-block-inspector,.editor-post-publish-panel,.editor-post-publish-panel__header) {background:var(--dark-admin-panel);color:var(--dark-admin-text);border-color:var(--dark-admin-border)}
@@ -200,6 +203,7 @@ html, body.wp-admin, #wpwrap, #wpcontent, #wpbody {background:var(--dark-admin-b
 /* The inserter icon mimics the "+" button, which is blue in this scheme: hide core's image in its own box and paint the button instead. */
 .wp-admin .edit-post-welcome-guide__text img[src*="%3Crect"] {filter:none;object-position:-9999px 0;border-radius:2px;background:#2271b1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M9.22727 4V14M4 8.77273H14' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") center/18px 18px no-repeat}
 .wp-admin .block-editor-block-inspector__no-blocks {background:var(--dark-admin-panel);color:var(--dark-admin-text)}
+.wp-admin .color-option .color-palette {outline:1px solid var(--dark-admin-border);outline-offset:-1px}
 .wp-admin .color-option:is(:hover,.selected) {background:var(--dark-admin-raised);color:var(--dark-admin-text)}
 .wp-admin .theme-browser .theme.add-new-theme .theme-name {margin-top:0;padding:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:48px}
 /* Preserve native select indicators: never reset their background image. */
