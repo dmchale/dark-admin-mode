@@ -8,10 +8,17 @@
     --dark-admin-muted: #b5b5b5;
     --dark-admin-border: #727272;
     --dark-admin-link: #8ac7ff;
+}
+/* Component design tokens. The WP 7 editor's ThemeProvider writes light values inline on <html> and on its wrapper,
+   which beats :root, so the editor UI around the content (header, sidebars, footer, modals, menus) gets them too.
+   Never the content area: block toolbars and insertion lines over the canvas keep core's look. */
+:root,.wp-admin :is(.interface-interface-skeleton__header,.interface-interface-skeleton__sidebar,.interface-interface-skeleton__secondary-sidebar,.interface-interface-skeleton__footer,.interface-interface-skeleton__actions,.edit-post-meta-boxes-main,.components-modal__frame,.components-popover:not(.block-editor-block-popover)) {
     --wp-components-color-background: #282828;
     --wp-components-color-foreground: #e3e3e3;
     --wp-components-color-foreground-inverted: #1b1b1b;
     --wp-components-color-gray-100: #333333;
+    --wp-components-color-gray-200: #4f4f4f;
+    --wp-components-color-gray-300: #4f4f4f;
     --wp-components-color-gray-400: #727272;
     --wp-components-color-gray-600: #b5b5b5;
     --wp-components-color-gray-700: #cccccc;
@@ -20,7 +27,24 @@
     --wpds-color-background-surface-neutral-strong: #333333;
     --wpds-color-foreground-content-neutral: #e3e3e3;
     --wpds-color-foreground-content-neutral-weak: #b5b5b5;
+    --wpds-color-background-surface-neutral-weak: #1f1f1f;
+    --wpds-color-stroke-surface-neutral: #4f4f4f;
+    --wpds-color-stroke-surface-neutral-weak: #3a3a3a;
+    --wpds-color-stroke-interactive-neutral: #727272;
+    --wpds-color-stroke-interactive-neutral-active: #b5b5b5;
+    --wpds-color-stroke-interactive-neutral-disabled: #4f4f4f;
+    --wpds-color-foreground-interactive-neutral: #e3e3e3;
+    --wpds-color-foreground-interactive-neutral-active: #ffffff;
+    --wpds-color-foreground-interactive-neutral-weak: #b5b5b5;
+    --wpds-color-foreground-interactive-neutral-disabled: #727272;
+    --wpds-color-background-interactive-neutral-weak-active: #3d3d3d;
+    --wpds-color-background-interactive-brand-weak-active: #2b3a4a;
+    --wpds-color-foreground-interactive-brand: #8ac7ff;
+    --wpds-color-foreground-interactive-brand-active: #c2e1ff;
 }
+/* Block popovers (toolbar, insertion line) and editor notices belong to the content area: keep them as core draws them.
+   Rules that would reach them exclude them inside :where(), which adds no specificity. */
+.wp-admin .block-editor-block-popover {color-scheme:light}
 html, body.wp-admin, #wpwrap, #wpcontent, #wpbody {background:var(--dark-admin-bg);color:var(--dark-admin-text)}
 .wp-admin :is(h1,h2,h3,h4,h5,h6,.form-table th,.form-wrap label,.widefat th,.widefat td,.widefat thead tr th,.widefat tfoot tr th) {color:var(--dark-admin-text)}
 .wp-admin :is(.description,.howto,.form-wrap p,.subsubsub,.subsubsub a.current,.tablenav,.displaying-num,.row-actions,.postbox .handle-order-higher,.postbox .handle-order-lower,.postbox .handlediv,.widefat .column-comment p),.wp-admin #wpfooter {color:var(--dark-admin-muted)}
@@ -28,8 +52,8 @@ html, body.wp-admin, #wpwrap, #wpcontent, #wpbody {background:var(--dark-admin-b
 .wp-admin :is(.striped>tbody>:nth-child(odd),ul.striped>:nth-child(odd),.alternate,.plugin-update-tr td,.plugins .active td,.plugins .active th,.nav-tab-active,.nav-tab:hover,.wp-filter) {background:var(--dark-admin-raised);color:var(--dark-admin-text)}
 .wp-admin :is(.postbox-header,.widefat thead,.widefat tfoot,.form-table td,.health-check-body,.health-check-header,.privacy-settings-header,.privacy-settings-body) {border-color:var(--dark-admin-border)}
 .wp-admin :is(.health-check-header,.health-check-body,.privacy-settings-header,.privacy-settings-body) {background:var(--dark-admin-bg);color:var(--dark-admin-text)}
-.wp-admin a {color:var(--dark-admin-link)}
-.wp-admin a:hover {color:#c2e1ff}
+.wp-admin a:where(:not(.components-notice *)) {color:var(--dark-admin-link)}
+.wp-admin a:hover:where(:not(.components-notice *)) {color:#c2e1ff}
 .wp-admin :is(.row-actions .delete a,.row-actions .trash a,.submitdelete,.notice-error a) {color:#ff9999}
 .wp-admin :is(input:not([type=button]):not([type=submit]):not([type=reset]):not([type=range]):not([type=color]):not([type=file]),textarea,select) {background-color:var(--dark-admin-bg);color:var(--dark-admin-text);border-color:var(--dark-admin-border)}
 .wp-admin :is(input,textarea)::placeholder {color:var(--dark-admin-muted);opacity:1}
@@ -38,14 +62,20 @@ html, body.wp-admin, #wpwrap, #wpcontent, #wpbody {background:var(--dark-admin-b
 .wp-admin :is(.button,.button-secondary,.page-title-action) {background:var(--dark-admin-panel);border-color:var(--dark-admin-link);color:var(--dark-admin-link)}
 .wp-admin :is(.button,.button-secondary,.page-title-action):hover {background:var(--dark-admin-raised);color:#c2e1ff}
 .wp-admin .button-primary,.wp-admin .button-primary:hover {background:#2271b1;border-color:#8ac7ff;color:#fff}
-.wp-admin :is(a,button,input,textarea,select):focus-visible {outline:2px solid #8ac7ff;outline-offset:2px;box-shadow:none}
+.wp-admin :is(a,button,input,textarea,select):focus-visible:where(:not(.block-editor-block-popover *,.components-notice *)) {outline:2px solid #8ac7ff;outline-offset:2px;box-shadow:none}
 .wp-admin :is(.notice-error,.error) {border-left-color:#ff9999}
 .wp-admin .notice-warning {border-left-color:#edc86b}
 .wp-admin :is(.notice-success,.updated) {border-left-color:#a3d7b6}
 .wp-admin :is(code,kbd,.code) {background:var(--dark-admin-raised);color:var(--dark-admin-text)}
 /* Editor controls use their own tokens; leave actual canvas contents alone. */
-.wp-admin :is(.interface-interface-skeleton__header,.interface-interface-skeleton__sidebar,.interface-interface-skeleton__footer,.editor-header,.editor-sidebar,.components-panel,.components-panel__body,.components-popover__content,.components-modal__content,.components-modal__header,.block-editor-inserter__menu,.block-editor-block-inspector,.editor-post-publish-panel,.editor-post-publish-panel__header) {background:var(--dark-admin-panel);color:var(--dark-admin-text);border-color:var(--dark-admin-border)}
-.wp-admin :is(.components-panel__body-title,.components-panel__body-toggle,.components-tab-panel__tabs-item,.components-button:not(.is-primary):not(.is-destructive),.components-base-control__label,.components-input-control__label) {color:var(--dark-admin-text)}
+.wp-admin :is(.interface-interface-skeleton__header,.interface-interface-skeleton__sidebar,.interface-interface-skeleton__footer,.editor-header,.editor-sidebar,.components-panel,.components-panel__body,.components-modal__content,.block-editor-inserter__menu,.block-editor-block-inspector,.editor-post-publish-panel,.editor-post-publish-panel__header) {background:var(--dark-admin-panel);color:var(--dark-admin-text);border-color:var(--dark-admin-border)}
+.wp-admin .components-popover:not(.block-editor-block-popover) .components-popover__content {background:var(--dark-admin-panel);color:var(--dark-admin-text);border-color:var(--dark-admin-border)}
+.wp-admin :is(.components-panel__body-title,.components-panel__body-toggle,.components-tab-panel__tabs-item,.components-base-control__label,.components-input-control__label) {color:var(--dark-admin-text)}
+/* Pressed toggles (e.g. Settings beside Publish) invert on purpose: light background from the foreground token, dark icon. */
+.wp-admin .components-button:not(.is-primary):not(.is-destructive):where(:not(.is-pressed,.block-editor-block-popover *,.components-notice *)) {color:var(--dark-admin-text)}
+/* Link-style buttons (e.g. the post summary values) use core's accent blue, unreadable on dark: give them the link color. */
+.wp-admin .components-button:is(.is-tertiary,.is-link):not(:disabled,[aria-disabled=true],.is-destructive):where(:not(.is-pressed,.block-editor-block-popover *,.components-notice *)) {color:var(--dark-admin-link)}
+.wp-admin .components-button:is(.is-tertiary,.is-link):not(:disabled,[aria-disabled=true],.is-destructive):hover:where(:not(.is-pressed,.block-editor-block-popover *,.components-notice *)) {color:#c2e1ff}
 .wp-admin :is(.components-button.is-primary,.components-button.is-primary:hover) {background:#2271b1;color:#fff}
 .wp-admin .components-button.is-destructive {color:#ff9999}
 .wp-admin :is(.components-input-control__container,.components-select-control__input,.components-text-control__input,.components-textarea-control__input) {background:var(--dark-admin-bg);color:var(--dark-admin-text)}
@@ -149,6 +179,18 @@ html, body.wp-admin, #wpwrap, #wpcontent, #wpbody {background:var(--dark-admin-b
 .wp-admin .column-date :is(a,time),.wp-admin .column-submitted :is(a,time) {color:var(--dark-admin-muted)}
 .wp-admin .row-actions :is(.approve,.untrash) a {color:#a3d7b6}
 .wp-admin .row-actions .spam a {color:#ff9999}
+.wp-admin .block-editor-block-card {color:var(--dark-admin-text)}
+/* Hard-coded dark grays in the editor sidebars: panel expand arrows and inserter section titles. */
+.wp-admin .components-panel__body-toggle.components-button .components-panel__arrow {color:var(--dark-admin-text)}
+.wp-admin :is(.block-editor-inserter__panel-title,.block-editor-inserter__panel-title button) {color:var(--dark-admin-muted)}
+/* Inserter: core paints the tabbed panel and its close button white, with a light tab divider and near-black block icons. */
+.wp-admin :is(.block-editor-tabbed-sidebar,.block-editor-tabbed-sidebar__close-button) {background:var(--dark-admin-panel)}
+.wp-admin .block-editor-tabbed-sidebar__tablist-and-close-button {border-bottom-color:var(--dark-admin-border)}
+.wp-admin .block-editor-block-types-list__item-icon {color:var(--dark-admin-text)}
+/* Welcome guides: inline icons in the text are near-black SVG images. Modal headers stay transparent (as in core) so the guide art shows. */
+.wp-admin :is(.edit-post-welcome-guide__text,.edit-site-welcome-guide__text) img {filter:invert(1)}
+/* The inserter icon mimics the "+" button, which is blue in this scheme: hide core's image in its own box and paint the button instead. */
+.wp-admin .edit-post-welcome-guide__text img[src*="%3Crect"] {filter:none;object-position:-9999px 0;border-radius:2px;background:#2271b1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M9.22727 4V14M4 8.77273H14' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") center/18px 18px no-repeat}
 .wp-admin .block-editor-block-inspector__no-blocks {background:var(--dark-admin-panel);color:var(--dark-admin-text)}
 .wp-admin .color-option:is(:hover,.selected) {background:var(--dark-admin-raised);color:var(--dark-admin-text)}
 .wp-admin .theme-browser .theme.add-new-theme .theme-name {margin-top:0;padding:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:48px}
@@ -167,3 +209,20 @@ html, body.wp-admin, #wpwrap, #wpcontent, #wpbody {background:var(--dark-admin-b
 #plugin-information.wp-admin :is(.fyi h3,blockquote) {color:var(--dark-admin-muted)}
 #plugin-information.wp-admin :is(blockquote,pre,.review) {border-color:var(--dark-admin-border)}
 #plugin-information.wp-admin .counter-back {background-color:var(--dark-admin-bg)}
+
+/* Compare Revisions: white meta bar, diff panel, slider track and tooltips; pale red/green diff lines. */
+.wp-admin :is(.revisions-meta,.revisions-diff,.revisions-tooltip,.revisions-tooltip-arrow>span,.revisions-tooltip-arrow::after) {background-color:var(--dark-admin-panel);color:var(--dark-admin-text);border-color:var(--dark-admin-border)}
+.wp-admin .revisions.pinned .revisions-controls {background:var(--dark-admin-bg)}
+.wp-admin .revisions-tickmarks {background-color:var(--dark-admin-raised)}
+.wp-admin .revisions-tickmarks>div {border-left-color:var(--dark-admin-border)}
+.wp-admin .revisions-controls .author-card .date {color:var(--dark-admin-muted)}
+.wp-admin .revisions-controls .author-card.autosave {color:#ff9999}
+.wp-admin table.diff .diff-deletedline {background-color:#3d2326}
+.wp-admin table.diff .diff-deletedline del {background-color:#7a2e35;color:#fff}
+.wp-admin table.diff .diff-addedline {background-color:#1f3626}
+.wp-admin table.diff .diff-addedline ins {background-color:#2d6a3c;color:#fff}
+.wp-admin .wp-slider .ui-slider-handle {background:var(--dark-admin-raised);border-color:var(--dark-admin-border)}
+.wp-admin .wp-slider .ui-slider-handle:not(:focus):not(.ui-state-focus) {box-shadow:0 1px 0 var(--dark-admin-bg)}
+.wp-admin .wp-slider .ui-slider-handle:is(:hover,:focus,:active,.ui-state-hover,.ui-state-focus,.ui-state-active) {background:#3d3d3d;border-color:var(--dark-admin-muted)}
+.wp-admin .wp-slider .ui-slider-handle::before {color:var(--dark-admin-text)}
+.wp-admin .wp-slider .ui-slider-handle:is(:hover,.ui-state-hover)::before {color:#fff}

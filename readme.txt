@@ -4,7 +4,7 @@ Tags: dark mode, admin, color scheme, dashboard, accessibility
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,12 @@ GitHub Releases, not WordPress.org. The plugin checks https://github.com/dmchale
 No. Once selected it is always dark.
 
 == Changelog ==
+
+= 1.1.0 =
+* Block editor: dark sidebars, inserter, menus, modals and welcome guides, including the WordPress 7 design tokens the editor sets inline.
+* Block editor: the content area (canvas, block toolbar, insertion line, editor notices) is left exactly as core and your theme draw it.
+* Readable link-style values in the editor sidebar (status, date, slug, author and so on).
+* Revisions: dark Compare Revisions screen and editor revisions panel, with readable diff colors.
 
 = 1.0.0 =
 * Initial release.
